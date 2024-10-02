@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Calculator</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    .calculator {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      background-color: #eee;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    button:hover {
+      background-color: #ddd;
+    }
+
+    .operator {
+      background-color: #fafafa;
+    }
+
+    #clear {
+      background-color: #f08080;
+      color: white;
+    }
+
+    #equals {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" readonly>
+
+    <div>
+      <button onclick="Number('7')">7</button>
+      <button onclick="Number('8')">8</button>
+      <button onclick="Number('9')">9</button>
+      <button onclick="Operator('/')" class="operator">/</button>
+    </div>
+
+    <div>
+      <button onclick="Number('4')">4</button>
+      <button onclick="Number('5')">5</button>
+      <button onclick="Number('6')">6</button>
+      <button onclick="Operator('*')" class="operator">*</button>
+    </div>
+
+    <div>
+      <button onclick="Number('1')">1</button>
+      <button onclick="Number('2')">2</button>
+      <button onclick="Number('3')">3</button>
+      <button onclick="Operator('-')" class="operator">-</button>
+    </div>
+
+    <div>
+      <button onclick="Number('0')">0</button>
+      <button onclick="Number('.')">.</button>
+      <button id="equals" onclick="calculate()">=</button>
+      <button onclick="Operator('+')" class="operator">+</button>
+    </div>
+
+    <button id="clear" onclick="clearDisplay()">C</button>
+  </div>
+
+  <script>
+    let display = document.getElementById('display');
+    let currentInput = '';
+
+    function Number(num) {
+      currentInput += num;
+      display.value = currentInput;
+    }
+
+    function Operator(op) {
+      currentInput += op;
+      display.value = currentInput;
+    }
+
+    function calculate() {
+      try {
+        display.value = eval(currentInput);
+        currentInput = display.value;
+      } catch (error) {
+        display.value = 'Error';
+        currentInput = '';
+      }
+    }
+
+    function clearDisplay() {
+      currentInput = '';
+      display.value = '';
+    }
+  </script>
+</body>
+</html>
